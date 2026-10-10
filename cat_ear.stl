@@ -1,0 +1,58 @@
+solid cat_ear
+facet normal -1.0 0.0 0.0
+outer loop
+vertex -0.009 -0.025 0
+vertex -0.009 0 0.06
+vertex -0.009 0.025 0
+endloop
+endfacet
+facet normal 1.0 0.0 0.0
+outer loop
+vertex 0.009 -0.025 0
+vertex 0.009 0.025 0
+vertex 0.009 0 0.06
+endloop
+endfacet
+facet normal 0.0 0.0 -1.0
+outer loop
+vertex -0.009 -0.025 0
+vertex -0.009 0.025 0
+vertex 0.009 0.025 0
+endloop
+endfacet
+facet normal 0.0 0.0 -1.0
+outer loop
+vertex -0.009 -0.025 0
+vertex 0.009 0.025 0
+vertex 0.009 -0.025 0
+endloop
+endfacet
+facet normal 0.0 0.923076923076923 0.3846153846153847
+outer loop
+vertex -0.009 0.025 0
+vertex -0.009 0 0.06
+vertex 0.009 0 0.06
+endloop
+endfacet
+facet normal -0.0 0.923076923076923 0.3846153846153847
+outer loop
+vertex -0.009 0.025 0
+vertex 0.009 0 0.06
+vertex 0.009 0.025 0
+endloop
+endfacet
+facet normal 0.0 -0.923076923076923 0.3846153846153847
+outer loop
+vertex -0.009 0 0.06
+vertex -0.009 -0.025 0
+vertex 0.009 -0.025 0
+endloop
+endfacet
+facet normal 0.0 -0.923076923076923 0.3846153846153847
+outer loop
+vertex -0.009 0 0.06
+vertex 0.009 -0.025 0
+vertex 0.009 0 0.06
+endloop
+endfacet
+endsolid cat_ear

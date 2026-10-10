@@ -1,0 +1,701 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.8">
+  <world name="WorldDemo">
+    <physics name="1ms" type="ignored">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+    <plugin filename="libignition-gazebo-physics-system.so" name="ignition::gazebo::systems::Physics">
+        </plugin>
+    <plugin filename="libignition-gazebo-user-commands-system.so" name="ignition::gazebo::systems::UserCommands">
+        </plugin>
+    <plugin filename="libignition-gazebo-scene-broadcaster-system.so" name="ignition::gazebo::systems::SceneBroadcaster">
+        </plugin>
+    <plugin filename="libignition-gazebo-triggered-publisher-system.so" name="ignition::gazebo::systems::TriggeredPublisher">
+      <input type="ignition.msgs.Int32" topic="/keyboard/keypress">
+        <match field="data">16777235</match>
+      </input>
+      <output type="ignition.msgs.Twist" topic="/cmd_vel"> 
+                linear: {x: 0.12}, angular: {z: 0.0} 
+            </output>
+    </plugin>
+    <plugin filename="libignition-gazebo-triggered-publisher-system.so" name="ignition::gazebo::systems::TriggeredPublisher">
+      <input type="ignition.msgs.Int32" topic="/keyboard/keypress">
+        <match field="data">16777237</match>
+      </input>
+      <output type="ignition.msgs.Twist" topic="/cmd_vel">
+                linear: {x: -0.12}, angular: {z: 0.0}
+            </output>
+    </plugin>
+    <plugin filename="libignition-gazebo-triggered-publisher-system.so" name="ignition::gazebo::systems::TriggeredPublisher">
+      <input type="ignition.msgs.Int32" topic="/keyboard/keypress">
+        <match field="data">16777236</match>
+      </input>
+      <output type="ignition.msgs.Twist" topic="/cmd_vel">
+                linear: {x: 0.0}, angular: {z: -0.5}
+            </output>
+    </plugin>
+    <plugin filename="libignition-gazebo-triggered-publisher-system.so" name="ignition::gazebo::systems::TriggeredPublisher">
+      <input type="ignition.msgs.Int32" topic="/keyboard/keypress">
+        <match field="data">16777234 </match>
+      </input>
+      <output type="ignition.msgs.Twist" topic="/cmd_vel">
+                linear: {x: 0.0}, angular: {z: 0.5}
+            </output>
+    </plugin>
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+            </plane>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.91 0.87 0.78 1</ambient>
+            <diffuse>0.91 0.87 0.78 1</diffuse>
+            <specular>0.8 0.8 0.8 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="demoRobot">
+      <pose>0 0 0.2 0 0 0</pose>
+      <link name="base_link">
+        <inertial>
+          <pose>0.1 0 0 0 0 0</pose>
+          <inertia>
+            <ixx>4.2111447e-02</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>4.2111447e-02</iyy>
+            <iyz>0</iyz>
+            <izz>7.5254874e-02</izz>
+          </inertia>
+          <mass>1.3729096e+00</mass>
+        </inertial>
+        <collision name="base_collision">
+          <pose>-0.064 0.08 0.06 0 0 -1.57</pose>
+          <geometry>
+            <mesh>
+              <uri>model://meshes/2DRoboPrac.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="cat_body_back">
+          <pose>0.035 0 0.09 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.065</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.95 0.81 0.58 1</ambient>
+            <diffuse>0.95 0.81 0.58 1</diffuse>
+          </material>
+        </visual>
+        <visual name="cat_body_front">
+          <pose>0.1 0 0.1 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.065</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.95 0.81 0.58 1</ambient>
+            <diffuse>0.95 0.81 0.58 1</diffuse>
+          </material>
+        </visual>
+        <visual name="cat_head">
+          <pose>0.17 0 0.16 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.068</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.95 0.81 0.58 1</ambient>
+            <diffuse>0.95 0.81 0.58 1</diffuse>
+          </material>
+        </visual>
+        <visual name="eye_left">
+          <pose>0.23 0.028 0.18 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.012</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.10 0.08 0.07 1</ambient>
+            <diffuse>0.10 0.08 0.07 1</diffuse>
+          </material>
+        </visual>
+        <visual name="eye_light_left">
+          <pose>0.239 0.025 0.184 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.0035</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>1.0 0.95 0.84 1</ambient>
+            <diffuse>1.0 0.95 0.84 1</diffuse>
+          </material>
+        </visual>
+        <visual name="eye_right">
+          <pose>0.23 -0.028 0.18 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.012</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.10 0.08 0.07 1</ambient>
+            <diffuse>0.10 0.08 0.07 1</diffuse>
+          </material>
+        </visual>
+        <visual name="eye_light_right">
+          <pose>0.239 -0.031 0.184 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.0035</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>1.0 0.95 0.84 1</ambient>
+            <diffuse>1.0 0.95 0.84 1</diffuse>
+          </material>
+        </visual>
+        <visual name="muzzle_left">
+          <pose>0.234 0.014 0.144 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.02</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>1.0 0.95 0.84 1</ambient>
+            <diffuse>1.0 0.95 0.84 1</diffuse>
+          </material>
+        </visual>
+        <visual name="muzzle_right">
+          <pose>0.234 -0.014 0.144 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.02</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>1.0 0.95 0.84 1</ambient>
+            <diffuse>1.0 0.95 0.84 1</diffuse>
+          </material>
+        </visual>
+        <visual name="nose">
+          <pose>0.253 0 0.154 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.009</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.95 0.48 0.52 1</ambient>
+            <diffuse>0.95 0.48 0.52 1</diffuse>
+          </material>
+        </visual>
+        <visual name="ear_left">
+          <pose>0.17 0.043 0.205 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://cat_ear.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.95 0.81 0.58 1</ambient>
+            <diffuse>0.95 0.81 0.58 1</diffuse>
+          </material>
+        </visual>
+        <visual name="ear_inner_left">
+          <pose>0.180 0.043 0.215 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://cat_ear.stl</uri>
+              <scale>0.2 0.65 0.65</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.95 0.48 0.52 1</ambient>
+            <diffuse>0.95 0.48 0.52 1</diffuse>
+          </material>
+        </visual>
+        <visual name="ear_right">
+          <pose>0.17 -0.043 0.205 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://cat_ear.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.95 0.81 0.58 1</ambient>
+            <diffuse>0.95 0.81 0.58 1</diffuse>
+          </material>
+        </visual>
+        <visual name="ear_inner_right">
+          <pose>0.180 -0.043 0.215 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://cat_ear.stl</uri>
+              <scale>0.2 0.65 0.65</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.95 0.48 0.52 1</ambient>
+            <diffuse>0.95 0.48 0.52 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tail">
+          <pose>-0.035 0 0.155 0 -0.6 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.014</radius>
+              <length>0.1</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.95 0.81 0.58 1</ambient>
+            <diffuse>0.95 0.81 0.58 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tail_tip">
+          <pose>-0.063 0 0.196 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.017</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>1.0 0.95 0.84 1</ambient>
+            <diffuse>1.0 0.95 0.84 1</diffuse>
+          </material>
+        </visual>
+      </link>
+      <link name="wheel_left_link">
+        <pose>0.0 0.095 0.023 -1.57 0 0</pose>
+        <inertial>
+          <inertia>
+            <ixx>1.1175580e-05</ixx>
+            <ixy>-4.2369783e-11</ixy>
+            <ixz>-5.9381719e-09</ixz>
+            <iyy>1.1192413e-05</iyy>
+            <iyz>-1.4400107e-11</iyz>
+            <izz>2.0712558e-05</izz>
+          </inertia>
+          <mass>0.1</mass>
+        </inertial>
+        <collision name="wheel_left_collision">
+          <geometry>
+            <cylinder>
+              <radius>0.033</radius>
+              <length>0.018</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="wheel_left_visual">
+          <geometry>
+            <cylinder>
+              <radius>0.033</radius>
+              <length>0.018</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.25 0.18 0.13 1</ambient>
+            <diffuse>0.25 0.18 0.13 1</diffuse>
+          </material>
+        </visual>
+      </link>
+      <joint name="wheel_left_joint" type="revolute">
+        <parent>base_link</parent>
+        <child>wheel_left_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+        </axis>
+      </joint>
+      <link name="wheel_right_link">
+        <pose>0.0 -0.095 0.023 -1.57 0 0</pose>
+        <inertial>
+          <inertia>
+            <ixx>1.1175580e-05</ixx>
+            <ixy>-4.2369783e-11</ixy>
+            <ixz>-5.9381719e-09</ixz>
+            <iyy>1.1192413e-05</iyy>
+            <iyz>-1.4400107e-11</iyz>
+            <izz>2.0712558e-05</izz>
+          </inertia>
+          <mass>0.1</mass>
+        </inertial>
+        <collision name="wheel_right_collision">
+          <geometry>
+            <cylinder>
+              <radius>0.033</radius>
+              <length>0.018</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="wheel_right_visual">
+          <geometry>
+            <cylinder>
+              <radius>0.033</radius>
+              <length>0.018</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.25 0.18 0.13 1</ambient>
+            <diffuse>0.25 0.18 0.13 1</diffuse>
+          </material>
+        </visual>
+      </link>
+      <joint name="wheel_right_joint" type="revolute">
+        <parent>base_link</parent>
+        <child>wheel_right_link</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+        </axis>
+      </joint>
+      <link name="caster_back_right_link">
+        <pose>0.15 -0.05 -0.004 -1.57 0 0</pose>
+        <inertial>
+          <mass>0.001</mass>
+          <inertia>
+            <ixx>0.00001</ixx>
+            <ixy>0.000</ixy>
+            <ixz>0.000</ixz>
+            <iyy>0.00001</iyy>
+            <iyz>0.000</iyz>
+            <izz>0.00001</izz>
+          </inertia>
+        </inertial>
+        <visual name="caster_back_right_visual">
+          <geometry>
+            <sphere>
+              <radius>0.005</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.0 1 0.0 1</ambient>
+            <diffuse>0.0 1 0.0 1</diffuse>
+            <specular>0.0 1 0.0 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>0.005</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+      <joint name="caster_back_right_joint" type="ball">
+        <parent>base_link</parent>
+        <child>caster_back_right_link</child>
+      </joint>
+      <link name="caster_back_left_link">
+        <pose>0.15 0.05 -0.004 -1.57 0 0</pose>
+        <inertial>
+          <mass>0.001</mass>
+          <inertia>
+            <ixx>0.00001</ixx>
+            <ixy>0.000</ixy>
+            <ixz>0.000</ixz>
+            <iyy>0.00001</iyy>
+            <iyz>0.000</iyz>
+            <izz>0.00001</izz>
+          </inertia>
+        </inertial>
+        <visual name="caster_back_left_visual">
+          <geometry>
+            <sphere>
+              <radius>0.005</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.0 1 0.0 1</ambient>
+            <diffuse>0.0 1 0.0 1</diffuse>
+            <specular>0.0 1 0.0 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>0.005</radius>
+            </sphere>
+          </geometry>
+        </collision>
+      </link>
+      <joint name="caster_back_left_joint" type="ball">
+        <parent>base_link</parent>
+        <child>caster_back_left_link</child>
+      </joint>
+      <plugin filename="libignition-gazebo-diff-drive-system.so" name="ignition::gazebo::systems::DiffDrive">
+        <left_joint>wheel_left_joint</left_joint>
+        <right_joint>wheel_right_joint</right_joint>
+        <wheel_separation>0.19</wheel_separation>
+        <wheel_radius>0.033</wheel_radius>
+        <topic>cmd_vel</topic>
+      </plugin>
+    </model>
+    <plugin filename="libignition-gazebo-triggered-publisher-system.so" name="ignition::gazebo::systems::TriggeredPublisher">
+      <input type="ignition.msgs.Int32" topic="/keyboard/keypress">
+        <match field="data">32</match>
+      </input>
+      <output type="ignition.msgs.Twist" topic="/cmd_vel">linear: {x: 0.0}, angular: {z: 0.0}</output>
+    </plugin>
+    <model name="cat_place_Food_Orange">
+      <static>true</static>
+      <pose>0.6 0.0 0 0 0 0</pose>
+      <link name="decoration">
+        <visual name="mat">
+          <pose>0 0 0.002 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.18</radius>
+              <length>0.002</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.96 0.65 0.30 1</ambient>
+            <diffuse>0.96 0.65 0.30 1</diffuse>
+          </material>
+        </visual>
+        <visual name="dish">
+          <pose>0.30 0 0.014 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.065</radius>
+              <length>0.026</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.94 0.92 0.85 1</ambient>
+            <diffuse>0.94 0.92 0.85 1</diffuse>
+          </material>
+        </visual>
+        <visual name="food_surface">
+          <pose>0.30 0 0.028 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.049</radius>
+              <length>0.003</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.38 0.22 0.12 1</ambient>
+            <diffuse>0.38 0.22 0.12 1</diffuse>
+          </material>
+        </visual>
+        <visual name="kibble_0">
+          <pose>0.28 -0.02 0.034 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.009</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.65 0.37 0.15 1</ambient>
+            <diffuse>0.65 0.37 0.15 1</diffuse>
+          </material>
+        </visual>
+        <visual name="kibble_1">
+          <pose>0.32 -0.02 0.034 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.009</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.65 0.37 0.15 1</ambient>
+            <diffuse>0.65 0.37 0.15 1</diffuse>
+          </material>
+        </visual>
+        <visual name="kibble_2">
+          <pose>0.28 0.02 0.034 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.009</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.65 0.37 0.15 1</ambient>
+            <diffuse>0.65 0.37 0.15 1</diffuse>
+          </material>
+        </visual>
+        <visual name="kibble_3">
+          <pose>0.32 0.02 0.034 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.009</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.65 0.37 0.15 1</ambient>
+            <diffuse>0.65 0.37 0.15 1</diffuse>
+          </material>
+        </visual>
+        <visual name="kibble_4">
+          <pose>0.3 0 0.034 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.009</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.65 0.37 0.15 1</ambient>
+            <diffuse>0.65 0.37 0.15 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="cat_place_Window_Mint">
+      <static>true</static>
+      <pose>0.6 0.6 0 0 0 0</pose>
+      <link name="decoration">
+        <visual name="mat">
+          <pose>0 0 0.002 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.18</radius>
+              <length>0.002</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.40 0.78 0.66 1</ambient>
+            <diffuse>0.40 0.78 0.66 1</diffuse>
+          </material>
+        </visual>
+        <visual name="glass">
+          <pose>0 0.34 0.22 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.36 0.018 0.28</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.58 0.82 0.93 1</ambient>
+            <diffuse>0.58 0.82 0.93 1</diffuse>
+          </material>
+        </visual>
+        <visual name="frame_left">
+          <pose>-0.19 0.33 0.22 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.025 0.035 0.32</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.55 0.36 0.21 1</ambient>
+            <diffuse>0.55 0.36 0.21 1</diffuse>
+          </material>
+        </visual>
+        <visual name="frame_right">
+          <pose>0.19 0.33 0.22 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.025 0.035 0.32</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.55 0.36 0.21 1</ambient>
+            <diffuse>0.55 0.36 0.21 1</diffuse>
+          </material>
+        </visual>
+        <visual name="frame_bottom">
+          <pose>0 0.33 0.065 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.40 0.035 0.025</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.55 0.36 0.21 1</ambient>
+            <diffuse>0.55 0.36 0.21 1</diffuse>
+          </material>
+        </visual>
+        <visual name="frame_top">
+          <pose>0 0.33 0.375 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.40 0.035 0.025</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.55 0.36 0.21 1</ambient>
+            <diffuse>0.55 0.36 0.21 1</diffuse>
+          </material>
+        </visual>
+        <visual name="frame_middle">
+          <pose>0 0.325 0.22 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.015 0.035 0.30</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.55 0.36 0.21 1</ambient>
+            <diffuse>0.55 0.36 0.21 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="cat_place_Bed_Blue">
+      <static>true</static>
+      <pose>0.0 0.0 0 0 0 0</pose>
+      <link name="decoration">
+        <visual name="mat">
+          <pose>0 0 0.002 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.18</radius>
+              <length>0.002</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.46 0.62 0.89 1</ambient>
+            <diffuse>0.46 0.62 0.89 1</diffuse>
+          </material>
+        </visual>
+        <visual name="pillow">
+          <pose>-0.25 0 0.025 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.10 0.15 0.045</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.90 0.92 1.0 1</ambient>
+            <diffuse>0.90 0.92 1.0 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+  </world>
+</sdf>
